@@ -1,0 +1,61 @@
+﻿kind: HorizontalPodAutoscaler
+apiVersion: autoscaling/v2beta2
+metadata:
+  name: grupo22-4winds
+  namespace: 4winds-grupo-22-fiap-fase4
+  selfLink: >-
+    /apis/autoscaling/v2beta2/namespaces/4winds-grupo-22-fiap-fase4/horizontalpodautoscalers/grupo22-4winds
+  uid: 5dce6cc2-946a-455e-8d9b-fd2f7b775c13
+  resourceVersion: '48762802'
+  creationTimestamp: '2022-04-01T23:50:58Z'
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: autoscaling/v2beta2
+      time: '2022-04-01T23:50:58Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:maxReplicas': {}
+          'f:metrics': {}
+          'f:minReplicas': {}
+          'f:scaleTargetRef':
+            'f:apiVersion': {}
+            'f:kind': {}
+            'f:name': {}
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: autoscaling/v1
+      time: '2022-04-01T23:51:13Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:autoscaling.alpha.kubernetes.io/conditions': {}
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: example
+    apiVersion: apps/v1
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
+status:
+  currentReplicas: 0
+  desiredReplicas: 0
+  currentMetrics: null
+  conditions:
+    - type: AbleToScale
+      status: 'False'
+      lastTransitionTime: '2022-04-01T23:51:13Z'
+      reason: FailedGetScale
+      message: >-
+        the HPA controller was unable to get the target's current scale:
+        deployments/scale.apps "example" not found
